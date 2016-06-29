@@ -23,28 +23,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 @interface Comparer : NSObject
 
-@property (nonatomic,strong) IBOutlet NSProgressIndicator *progressBar;
-@property (nonatomic,strong) IBOutlet NSTextField *progressMsg;
-@property (nonatomic,strong) IBOutlet NSPanel *progressPanel;
-@property (nonatomic,strong) IBOutlet NSProgressIndicator *progressSpinner;
+@property (nonatomic,strong) IBOutlet NSProgressIndicator * _Nullable progressBar;
+@property (nonatomic,strong) IBOutlet NSTextField * _Nullable progressMsg;
+@property (nonatomic,strong) IBOutlet NSPanel * _Nullable progressPanel;
+@property (nonatomic,strong) IBOutlet NSProgressIndicator * _Nullable progressSpinner;
 @property (nonatomic,assign) BOOL progressCancelled;
-@property (nonatomic,strong) NSMutableString *logString;
-@property (nonatomic,strong) NSString *logFile;
+@property (nonatomic,strong) NSMutableString * _Nullable logString;
+@property (nonatomic,strong) NSURL * _Nullable logURL;
 
-- (NSMutableArray<NSString *> *)listDirectory:(NSString *)pathString;
-- (void)weedMissingFromArray:(NSMutableArray *)fromArray
-                     InArray:(NSMutableArray *)inArray
-                     InTitle:(NSString *)inTitle;
-- (IBAction)progressCancel:(id)sender;
+- (NSMutableArray<NSString *> * _Nullable)listDirectory:(NSString * _Nonnull)pathString;
+- (void)weedMissingFromArray:(NSMutableArray * _Nonnull)fromArray
+                     InArray:(NSMutableArray * _Nonnull)inArray
+                     InTitle:(NSString * _Nonnull)inTitle;
+- (IBAction)progressCancel:(id _Nullable)sender;
 - (void)doThreadedProcess;
-- (void)compareDirectory:(NSString *)fromDir toDirectory:(NSString *)toDir
-            withContents:(NSMutableArray *)heirarchy;
+- (void)compareDirectory:(NSString * _Nonnull)fromDir toDirectory:(NSString * _Nonnull)toDir
+            withContents:(NSMutableArray * _Nonnull)heirarchy;
 - (int)comparePaths;
-- (BOOL)compareNewFile:(NSString *)newFile toOldFile:(NSString *)oldFile;
-- (NSString *)checksumForFile:(NSString *)file;
+- (BOOL)compareNewFile:(NSString * _Nonnull)newFile toOldFile:(NSString * _Nonnull)oldFile;
+- (BOOL)compareNewFileURL:(NSURL * _Nonnull)newURL toOldFileURL:(NSURL * _Nonnull)oldURL;
+- (NSString * _Nullable)checksumForFile:(NSString * _Nonnull)file;
+- (NSString * _Nullable)checksumForURL:(NSURL * _Nonnull)url;
+
 - (int)initLog;
 - (void)closeLog;
 
 @end
 
-int checksum (NSString *file, char * checksum_string);
+int checksum (NSString * _Nullable file, char * _Nullable checksum_string );

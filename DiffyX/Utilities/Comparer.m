@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
     self = [super init];
     _logString = [[NSMutableString alloc] init];
-    _logFile = @"";
+    _logURL = nil;
     return self;
 }
 
@@ -42,7 +42,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         if (self.progressCancelled)
             break;
         BOOL isDir = YES; // default to what we don't want
-        NSString * fullPath = [[pathString stringByAppendingString:@"/"] stringByAppendingString:pname];
+        NSString * fullPath = [pathString stringByAppendingPathComponent:pname];
         // if ([[pname pathExtension] isEqualToString:@"rtfd"])
         // {
         //    [direnum skipDescendents]; // don't enumerate this directory
@@ -56,7 +56,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         }
     }
 
-    [theArray sortUsingSelector:@selector(compare:)];
+    [theArray sortUsingSelector:@selector(localizedStandardCompare:)];
     return theArray;
 }
 
@@ -88,7 +88,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         loopCounter++;
         if (loopCounter % 360 == 0) // yield some time once in a while
         {
-            [NSThread sleepUntilDate:[[NSDate date] addTimeInterval:0]];
+            [NSThread sleepUntilDate:[NSDate date]];
             loopCounter = 0;
         }
         if ([inArray containsObject:pname] == false)
@@ -107,18 +107,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 // Compare two directories that have the same heirarchy and file names within,
 //   This is done after weeding out missing files.
-- (void)compareDirectory:(NSString *)fromDir toDirectory:(NSString *)toDir
-        withContents:(NSMutableArray *)heirarchy
+- (void)compareDirectory:(NSString *)fromDir
+             toDirectory:(NSString *)toDir
+            withContents:(NSMutableArray *)heirarchy
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
+    NSURL *fromDirURL = [NSURL fileURLWithPath:fromDir];
+    NSURL *toDirURL = [NSURL fileURLWithPath:toDir];
     NSString *pname = nil;
     int loopCounter = 0;
     double fileCount = 0;
     double maxFiles = [heirarchy count];
-    BOOL isEqual = NO;
-    NSMutableString *newFile = [NSMutableString string];
-    NSMutableString *oldFile = [NSMutableString string];
 
     [self.progressBar setMinValue:0];
     [self.progressBar setMaxValue:maxFiles];
@@ -130,7 +130,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         loopCounter++;
         if (loopCounter % 360 == 0) // yield some time once in a while
         {
-            [NSThread sleepUntilDate:[[NSDate date] addTimeInterval:0]];
+            [NSThread sleepUntilDate:[NSDate date]];
             loopCounter = 0;
         }
 
@@ -139,32 +139,40 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
         [self.progressMsg setStringValue:pname];
 
-        // Reset our baseline path
-        [newFile setString:[fromDir stringByAppendingString:@"/"]];
-        [oldFile setString:[toDir stringByAppendingString:@"/"]];
+        NSURL *newFileURL = [fromDirURL URLByAppendingPathComponent:pname];
+        NSURL *oldFileURL = [toDirURL URLByAppendingPathComponent:pname];
 
-        // Add filename from heirarchy
-        [newFile appendString:pname];
-        [oldFile appendString:pname];
-        
         // Compare two files for equality.  Returning > 0 means equal.
-        isEqual = [self compareNewFile:newFile toOldFile:oldFile];
+        BOOL isEqual = [self compareNewFileURL:newFileURL toOldFileURL:oldFileURL];
 
-        if (!isEqual && ([prefs integerForKey:@"Report Different"]))
+        if (!isEqual)
         {
-            // ********** report different files
-            [self.logString appendFormat:@"Files are different: %@\n", pname];
+            if ([prefs integerForKey:@"Report Different"])
+            {
+                // ********** report different files
+                [self.logString appendFormat:@"Files are different: %@\n", pname];
+            }
         }
-        else if (isEqual && ([prefs integerForKey:@"Report Identical"]))
+        else
         {
-            // ********** report indentical files
-            [self.logString appendFormat:@"Files are indentical: %@\n", pname];
-        }
-        if (isEqual && ([prefs integerForKey:@"Delete Identical"]))
-        {
-            // ********** delete indentical files
-            [[NSFileManager defaultManager] removeFileAtPath:newFile handler:nil];
-            [[NSFileManager defaultManager] removeFileAtPath:oldFile handler:nil];
+            if ([prefs integerForKey:@"Report Identical"])
+            {
+                [self.logString appendFormat:@"Files are indentical: %@\n", pname];
+            }
+
+            if ([prefs integerForKey:@"Delete Identical"])
+            {
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSError *error = nil;
+
+                [fileManager removeItemAtURL:newFileURL error:&error];
+                if (error)
+                    [self.logString appendFormat:@"Error while attempting to delete the identical file at '%@': %@\n", newFileURL.absoluteString, error];
+
+                [fileManager removeItemAtURL:oldFileURL error:&error];
+                if (error)
+                    [self.logString appendFormat:@"Error while attempting to delete the identical file at '%@': %@\n", oldFileURL.absoluteString, error];
+            }
         }
     }
 }
@@ -194,15 +202,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             //[progressSpinner setDisplayedWhenStopped:NO];
             [self.progressBar startAnimation:self];
 
-            [self.progressMsg setStringValue:@"Preparing..."];
-
+            self.progressMsg.stringValue = @"Preparing...";
             [[self.progressBar window] makeKeyAndOrderFront:self]; // open the progress panel
 
-            [self.progressMsg setStringValue:@"Scanning Directory Structure"];
+            self.progressMsg.stringValue = @"Scanning Directory Structure";
             NSMutableArray<NSString *> *newDirectory = [self listDirectory:newPathString];
             NSMutableArray<NSString *> *oldDirectory = [self listDirectory:oldPathString];
 
-            [self.progressMsg setStringValue:@"Weeding Out Missing Items"];
+            self.progressMsg.stringValue = @"Weeding Out Missing Items";
             [self weedMissingFromArray:oldDirectory InArray:newDirectory InTitle:@"New"];
             [self weedMissingFromArray:newDirectory InArray:oldDirectory InTitle:@"Old"];
 
@@ -212,19 +219,71 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             {
                 [self.logString appendString:@"*** Compare Process Cancelled by User ***\n"];
             }
-            [self closeLog]; // Flush our log text out to our logfile.
+            [self closeLog]; // Flush our log text out to our log.
 
             [self.progressBar stopAnimation:self];
             [self.progressSpinner stopAnimation:self];
             
             [[self.progressBar window] close]; // close the progress panel
-            
-            NSRunAlertPanel(@"Complete", @"Directory comparison is complete, see log for details.", @"Done", nil, nil);
+
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.alertStyle = NSInformationalAlertStyle;
+            alert.messageText = @"Complete";
+            alert.informativeText = @"Directory comparison is complete, see log for details.";
+            [alert addButtonWithTitle:@"Done"];
+            [alert runModal];
         }
     }
-
-    return;
 }
+
+- (void)compareAndRefreshUI
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.progressCancelled = NO; // reset our cancelled button
+        [self.progressSpinner setUsesThreadedAnimation:YES];
+        [self.progressBar setUsesThreadedAnimation:YES];
+        [self.progressSpinner startAnimation:self];
+        [self.progressSpinner setIndeterminate:YES];
+        [self.progressBar setIndeterminate:YES];
+        [self.progressBar startAnimation:self];
+
+        self.progressMsg.stringValue = @"Comparing...";
+        [[self.progressBar window] makeKeyAndOrderFront:self]; // open the progress panel
+    }];
+
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+        NSString * newPathString = [prefs stringForKey:@"New Path"];
+        NSString * oldPathString = [prefs stringForKey:@"Old Path"];
+
+        NSMutableArray<NSString *> *newDirectory = [self listDirectory:newPathString];
+        NSMutableArray<NSString *> *oldDirectory = [self listDirectory:oldPathString];
+
+        [self weedMissingFromArray:oldDirectory InArray:newDirectory InTitle:@"New"];
+        [self weedMissingFromArray:newDirectory InArray:oldDirectory InTitle:@"Old"];
+
+        [self compareDirectory:newPathString toDirectory:oldPathString withContents:newDirectory];
+
+        if (self.progressCancelled == YES)
+            [self.logString appendString:@"*** Compare Process Cancelled by User ***\n"];
+
+        [self closeLog]; // Flush our log text out to our log.
+
+        [self.progressBar stopAnimation:self];
+        [self.progressSpinner stopAnimation:self];
+
+        [[self.progressBar window] close]; // close the progress panel
+
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.alertStyle = NSInformationalAlertStyle;
+        alert.messageText = @"Complete";
+        alert.informativeText = @"Directory comparison is complete, see log for details.";
+        [alert addButtonWithTitle:@"Done"];
+        [alert runModal];
+    }];
+}
+
 
 - (int)comparePaths
 {
@@ -260,7 +319,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             
             if ([self initLog]) // Where to save the log file
             {
-                [NSThread detachNewThreadSelector:@selector(doThreadedProcess) toTarget:self withObject:nil]; // run our compare process thread
+                [NSThread detachNewThreadSelector:@selector(compareAndRefreshUI) toTarget:self withObject:nil]; // run our compare process thread
 //                [self doThreadedProcess];
             }
         }
@@ -313,6 +372,48 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     return checksum_string;
 }
 
+- (NSString *)checksumForURL:(NSURL *)url
+{
+    NSError *error = nil;
+    NSData * fileData = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&error];
+
+    if (!fileData || error)
+    {
+        NSLog(@"Error reading '%@': %@", url, error);
+        return nil;
+    }
+
+    NSMutableString * checksum_string = [[NSMutableString alloc] init];
+    NSUInteger length = [fileData length];
+
+    SHA3CTX context;
+    unsigned char digest[200] = "";
+    unsigned char checksumChar = 0;
+    short i = 0;
+    short j = 0;
+    const void *bytes = [fileData bytes];
+
+    SHA3Init(&context, SHA3_256);
+
+    SHA3Update(&context, (void *)bytes, (uint32_t)length);
+
+    SHA3Final(digest, &context);
+
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            long location = i * 4 + j;
+            NSAssert1(location >= 0 && location < 200, @"Bad location -- %ld", location);
+            checksumChar = digest[location];
+            [checksum_string appendFormat:@"%02X", checksumChar];
+        }
+    }
+
+    return checksum_string;
+}
+
+
 // Compare two files for equality.  Returning > 0 means equal.
 - (BOOL)compareNewFile:(NSString *)newFile toOldFile:(NSString *)oldFile
 {
@@ -332,6 +433,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     return isEqual;
 }
 
+- (BOOL)compareNewFileURL:(NSURL *)newURL toOldFileURL:(NSURL *)oldURL
+{
+    BOOL isEqual = NO;
+
+    if (!newURL || !oldURL)
+        return isEqual;
+
+    NSString *one_sum_string = [self checksumForURL:newURL];
+    if (one_sum_string)
+    {
+        NSString *two_sum_string = [self checksumForURL:oldURL];
+        if (two_sum_string)
+            isEqual = [one_sum_string isEqualToString:two_sum_string];
+    }
+
+    return isEqual;
+}
+
 - (int)initLog
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -339,12 +458,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     NSString * oldPathString = [prefs stringForKey:@"Old Path"];
 
     NSSavePanel *sPanel = [NSSavePanel savePanel];
-    [sPanel setTitle:@"Save DiffyX Results"];
-    NSInteger result = [sPanel runModalForDirectory:NSHomeDirectory() file:@"diffyx-log.txt"];
-    if (result == NSOKButton) {
-        NSMutableString *logString = [[NSMutableString alloc] initWithString:@"*** Begin Settings ***\n"];
+    sPanel.title = @"Save DiffyX Results";
+    sPanel.directoryURL = [NSURL fileURLWithPath:NSHomeDirectory() isDirectory:YES];
+    sPanel.nameFieldStringValue = @"diffyx-log.txt";
 
-        [logString setString:@"*** Begin Settings ***\n"];
+    int result = 0;
+    if ([sPanel runModal] == NSFileHandlingPanelOKButton)
+    {
+        NSMutableString *logString = [[NSMutableString alloc] initWithString:@"*** Begin Settings ***\n"];
         [logString appendFormat:@"\tNew Directory Path: %@\n", newPathString];
         [logString appendFormat:@"\tOld Directory Path: %@\n", oldPathString];
         [logString appendFormat:@"\tCompare Resources: %@\n", @"Disabled"];
@@ -355,35 +476,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         [logString appendString:@"*** End Settings ***\n"];
 
         _logString = logString;
-
-        NSString *fileName = [sPanel filename];
-        if (!fileName)
-            fileName = @"";
-        self.logFile = fileName;
+        _logURL = sPanel.URL;
 
         result = 1;
     }
-    else
-    {
-        result = 0;
-    }
-    return (int)result;
+
+    return result;
 }
 
 - (void)closeLog
 {
-    NSAssert(self.logFile != NULL && self.logFile.length > 0, @"Must have a valid destination log file");
-    [self.logString writeToFile:self.logFile atomically:NO];
+    NSAssert(self.logURL != NULL, @"Must have a valid destination log file");
+    NSError *error = nil;
+    [self.logString writeToURL:self.logURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
     self.logString = [[NSMutableString alloc] init];
-
-    NSMutableString *logFile = [self.logFile mutableCopy];
-    [logFile appendString:@".next.log"];
-    self.logFile = logFile;
 }
 
 @end
-
-
 
 
 
