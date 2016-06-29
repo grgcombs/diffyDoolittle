@@ -1,0 +1,467 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		372917E61D1DDD9F0090FAA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 372917E51D1DDD9F0090FAA8 /* AppDelegate.m */; };
+		372917E91D1DDD9F0090FAA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 372917E81D1DDD9F0090FAA8 /* main.m */; };
+		372917EC1D1DDD9F0090FAA8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372917EB1D1DDD9F0090FAA8 /* ViewController.m */; };
+		372917EE1D1DDD9F0090FAA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 372917ED1D1DDD9F0090FAA8 /* Assets.xcassets */; };
+		372DB2FC1D21E80D0036F637 /* DiffyXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 372DB2FB1D21E80D0036F637 /* DiffyXTests.m */; };
+		372DB3041D21E8480036F637 /* Sha3Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 372DB3031D21E8480036F637 /* Sha3Tests.m */; };
+		374185FF1D23477E0008AA99 /* sha3.m in Sources */ = {isa = PBXBuildFile; fileRef = 374185FE1D23477E0008AA99 /* sha3.m */; };
+		374186071D23479B0008AA99 /* Comparer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374186021D23479B0008AA99 /* Comparer.m */; };
+		374186081D23479B0008AA99 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 374186041D23479B0008AA99 /* Controller.m */; };
+		374186091D23479B0008AA99 /* FileDropTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 374186061D23479B0008AA99 /* FileDropTextField.m */; };
+		3741860C1D23491B0008AA99 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3741860A1D23491B0008AA99 /* MainMenu.nib */; };
+		3741860F1D2349200008AA99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3741860D1D2349200008AA99 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		372DB2FE1D21E80D0036F637 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 372917D91D1DDD9F0090FAA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 372917E01D1DDD9F0090FAA8;
+			remoteInfo = DiffyX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		372917E11D1DDD9F0090FAA8 /* DiffyX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffyX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		372917E41D1DDD9F0090FAA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		372917E51D1DDD9F0090FAA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		372917E81D1DDD9F0090FAA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		372917EA1D1DDD9F0090FAA8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		372917EB1D1DDD9F0090FAA8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		372917ED1D1DDD9F0090FAA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		372917F21D1DDD9F0090FAA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		372DB2F91D21E80D0036F637 /* DiffyXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffyXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		372DB2FB1D21E80D0036F637 /* DiffyXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiffyXTests.m; sourceTree = "<group>"; };
+		372DB2FD1D21E80D0036F637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		372DB3031D21E8480036F637 /* Sha3Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sha3Tests.m; sourceTree = "<group>"; };
+		374185FD1D23477E0008AA99 /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		374185FE1D23477E0008AA99 /* sha3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sha3.m; sourceTree = "<group>"; };
+		374186011D23479B0008AA99 /* Comparer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comparer.h; sourceTree = "<group>"; };
+		374186021D23479B0008AA99 /* Comparer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comparer.m; sourceTree = "<group>"; };
+		374186031D23479B0008AA99 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		374186041D23479B0008AA99 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		374186051D23479B0008AA99 /* FileDropTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDropTextField.h; sourceTree = "<group>"; };
+		374186061D23479B0008AA99 /* FileDropTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDropTextField.m; sourceTree = "<group>"; };
+		3741860B1D23491B0008AA99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Base; path = Base.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		3741860E1D2349200008AA99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		372917DE1D1DDD9F0090FAA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		372DB2F61D21E80D0036F637 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		372917D81D1DDD9F0090FAA8 = {
+			isa = PBXGroup;
+			children = (
+				372917E31D1DDD9F0090FAA8 /* DiffyX */,
+				372DB2FA1D21E80D0036F637 /* DiffyXTests */,
+				372917E21D1DDD9F0090FAA8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		372917E21D1DDD9F0090FAA8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				372917E11D1DDD9F0090FAA8 /* DiffyX.app */,
+				372DB2F91D21E80D0036F637 /* DiffyXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		372917E31D1DDD9F0090FAA8 /* DiffyX */ = {
+			isa = PBXGroup;
+			children = (
+				372917E41D1DDD9F0090FAA8 /* AppDelegate.h */,
+				372917E51D1DDD9F0090FAA8 /* AppDelegate.m */,
+				372917EA1D1DDD9F0090FAA8 /* ViewController.h */,
+				372917EB1D1DDD9F0090FAA8 /* ViewController.m */,
+				374186001D23479B0008AA99 /* Utilities */,
+				374185FC1D23477E0008AA99 /* Comparison */,
+				372917ED1D1DDD9F0090FAA8 /* Assets.xcassets */,
+				3741860A1D23491B0008AA99 /* MainMenu.nib */,
+				372917F21D1DDD9F0090FAA8 /* Info.plist */,
+				3741860D1D2349200008AA99 /* InfoPlist.strings */,
+				372917E71D1DDD9F0090FAA8 /* Supporting Files */,
+			);
+			path = DiffyX;
+			sourceTree = "<group>";
+		};
+		372917E71D1DDD9F0090FAA8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				372917E81D1DDD9F0090FAA8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		372DB2FA1D21E80D0036F637 /* DiffyXTests */ = {
+			isa = PBXGroup;
+			children = (
+				372DB2FB1D21E80D0036F637 /* DiffyXTests.m */,
+				372DB3031D21E8480036F637 /* Sha3Tests.m */,
+				372DB2FD1D21E80D0036F637 /* Info.plist */,
+			);
+			path = DiffyXTests;
+			sourceTree = "<group>";
+		};
+		374185FC1D23477E0008AA99 /* Comparison */ = {
+			isa = PBXGroup;
+			children = (
+				374185FD1D23477E0008AA99 /* sha3.h */,
+				374185FE1D23477E0008AA99 /* sha3.m */,
+			);
+			path = Comparison;
+			sourceTree = "<group>";
+		};
+		374186001D23479B0008AA99 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				374186011D23479B0008AA99 /* Comparer.h */,
+				374186021D23479B0008AA99 /* Comparer.m */,
+				374186031D23479B0008AA99 /* Controller.h */,
+				374186041D23479B0008AA99 /* Controller.m */,
+				374186051D23479B0008AA99 /* FileDropTextField.h */,
+				374186061D23479B0008AA99 /* FileDropTextField.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		372917E01D1DDD9F0090FAA8 /* DiffyX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 372918001D1DDD9F0090FAA8 /* Build configuration list for PBXNativeTarget "DiffyX" */;
+			buildPhases = (
+				372917DD1D1DDD9F0090FAA8 /* Sources */,
+				372917DE1D1DDD9F0090FAA8 /* Frameworks */,
+				372917DF1D1DDD9F0090FAA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiffyX;
+			productName = DiffyX;
+			productReference = 372917E11D1DDD9F0090FAA8 /* DiffyX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		372DB2F81D21E80D0036F637 /* DiffyXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 372DB3001D21E80D0036F637 /* Build configuration list for PBXNativeTarget "DiffyXTests" */;
+			buildPhases = (
+				372DB2F51D21E80D0036F637 /* Sources */,
+				372DB2F61D21E80D0036F637 /* Frameworks */,
+				372DB2F71D21E80D0036F637 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				372DB2FF1D21E80D0036F637 /* PBXTargetDependency */,
+			);
+			name = DiffyXTests;
+			productName = DiffyXTests;
+			productReference = 372DB2F91D21E80D0036F637 /* DiffyXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		372917D91D1DDD9F0090FAA8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Sleestacks;
+				TargetAttributes = {
+					372917E01D1DDD9F0090FAA8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					372DB2F81D21E80D0036F637 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 372917E01D1DDD9F0090FAA8;
+					};
+				};
+			};
+			buildConfigurationList = 372917DC1D1DDD9F0090FAA8 /* Build configuration list for PBXProject "DiffyX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				English,
+			);
+			mainGroup = 372917D81D1DDD9F0090FAA8;
+			productRefGroup = 372917E21D1DDD9F0090FAA8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				372917E01D1DDD9F0090FAA8 /* DiffyX */,
+				372DB2F81D21E80D0036F637 /* DiffyXTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		372917DF1D1DDD9F0090FAA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				372917EE1D1DDD9F0090FAA8 /* Assets.xcassets in Resources */,
+				3741860F1D2349200008AA99 /* InfoPlist.strings in Resources */,
+				3741860C1D23491B0008AA99 /* MainMenu.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		372DB2F71D21E80D0036F637 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		372917DD1D1DDD9F0090FAA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				372917EC1D1DDD9F0090FAA8 /* ViewController.m in Sources */,
+				374186091D23479B0008AA99 /* FileDropTextField.m in Sources */,
+				374186081D23479B0008AA99 /* Controller.m in Sources */,
+				372917E91D1DDD9F0090FAA8 /* main.m in Sources */,
+				372917E61D1DDD9F0090FAA8 /* AppDelegate.m in Sources */,
+				374185FF1D23477E0008AA99 /* sha3.m in Sources */,
+				374186071D23479B0008AA99 /* Comparer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		372DB2F51D21E80D0036F637 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				372DB3041D21E8480036F637 /* Sha3Tests.m in Sources */,
+				372DB2FC1D21E80D0036F637 /* DiffyXTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		372DB2FF1D21E80D0036F637 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 372917E01D1DDD9F0090FAA8 /* DiffyX */;
+			targetProxy = 372DB2FE1D21E80D0036F637 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3741860A1D23491B0008AA99 /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3741860B1D23491B0008AA99 /* Base */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		3741860D1D2349200008AA99 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3741860E1D2349200008AA99 /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		372917FE1D1DDD9F0090FAA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		372917FF1D1DDD9F0090FAA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		372918011D1DDD9F0090FAA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sleestacks.DiffyX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		372918021D1DDD9F0090FAA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sleestacks.DiffyX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		372DB3011D21E80D0036F637 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = DiffyXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sleestacks.DiffyXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffyX.app/Contents/MacOS/DiffyX";
+			};
+			name = Debug;
+		};
+		372DB3021D21E80D0036F637 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = DiffyXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sleestacks.DiffyXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffyX.app/Contents/MacOS/DiffyX";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		372917DC1D1DDD9F0090FAA8 /* Build configuration list for PBXProject "DiffyX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				372917FE1D1DDD9F0090FAA8 /* Debug */,
+				372917FF1D1DDD9F0090FAA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		372918001D1DDD9F0090FAA8 /* Build configuration list for PBXNativeTarget "DiffyX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				372918011D1DDD9F0090FAA8 /* Debug */,
+				372918021D1DDD9F0090FAA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		372DB3001D21E80D0036F637 /* Build configuration list for PBXNativeTarget "DiffyXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				372DB3011D21E80D0036F637 /* Debug */,
+				372DB3021D21E80D0036F637 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 372917D91D1DDD9F0090FAA8 /* Project object */;
+}
