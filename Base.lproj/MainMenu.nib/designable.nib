@@ -425,7 +425,7 @@ DQ
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="360">
                             <font key="font" metaFont="smallSystem"/>
                             <string key="title">©2002, Gregory S. Combs
-Released under the Gnu Public License (GPL)
+Released under the MIT License
     For more information please see:
     http://www.sourceforge.net/projects/misanthrope</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
